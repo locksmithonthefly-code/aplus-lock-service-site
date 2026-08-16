@@ -1,0 +1,18 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/soro-webhook"
+  to = "/.netlify/functions/soro-webhook"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/.netlify/functions/blog-index"
+  status = 200
+
+[[redirects]]
+  from = "/blog/*"
+  to = "/.netlify/functions/blog-post"
+  status = 200
