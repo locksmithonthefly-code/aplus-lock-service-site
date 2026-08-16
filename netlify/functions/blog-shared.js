@@ -22,23 +22,33 @@ const HEAD_STYLE = `
   section{padding:48px 0;}
   h1.title{font-size:clamp(1.7rem,4vw,2.4rem); margin:20px 0 12px;}
   .post-meta{font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--steel-light); margin-bottom:28px;}
-  .post-body{color:var(--off-white-dim); font-size:1.02rem;}
+  .post-body{color:var(--off-white-dim); font-size:1.02rem; width:100%; max-width:none; min-width:0; overflow:hidden; isolation:isolate;}
   .post-body p{margin-bottom:18px;}
   .post-body h2, .post-body h3{color:var(--off-white); margin:28px 0 12px;}
   .post-body img{max-width:100%; height:auto; border-radius:var(--radius); margin:20px 0;}
   .post-body a{color:var(--brass-bright); text-decoration:underline;}
-  /* Soro's article HTML can include its own inline positioning/CSS (sticky
-     boxes, floating widgets, tables of contents). Lock all of that down so
-     it can never escape the article and overlap the header or run off the
-     page width. */
+  /* Generated article markup is normalized server-side. These rules provide
+     a second containment layer for legacy and unusual layout elements. */
+  .post-body > *{
+    width:100% !important;
+    max-width:none !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
   .post-body *{
     position:static !important;
     z-index:auto !important;
     max-width:100% !important;
+    min-width:0 !important;
     float:none !important;
+    clear:both !important;
+    transform:none !important;
+    translate:none !important;
     top:auto !important; left:auto !important; right:auto !important; bottom:auto !important;
   }
-  .post-body table{display:block; overflow-x:auto; width:100%;}
+  .post-body img, .post-body video, .post-body iframe, .post-body svg{height:auto;}
+  .post-body pre{max-width:100%; overflow-x:auto; white-space:pre-wrap; overflow-wrap:anywhere;}
+  .post-body table{display:block; overflow-x:auto; width:100% !important;}
   .post-list-item{border-top:1px solid var(--line); padding:26px 0;}
   .post-list-item:first-child{border-top:none;}
   .post-list-item h2{font-size:1.2rem; margin-bottom:8px;}

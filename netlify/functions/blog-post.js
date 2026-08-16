@@ -1,6 +1,14 @@
 const { getStore } = require("@netlify/blobs");
 const { pageWrap } = require("./blog-shared");
 
+function normalizePostHtml(html) {
+  return String(html || "")
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, "")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, "")
+    .replace(/<link\b[^>]*>/gi, "")
+    .replace(/\s(?:style|class|id)\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, "");
+}
+
 exports.handler = async (event) => {
   const slug = event.path.replace("/blog/", "").replace(/\/$/, "");
   const store = getStore("blog-posts");
@@ -32,7 +40,7 @@ exports.handler = async (event) => {
     <h1 class="title">${post.title}</h1>
     <div class="post-meta">${new Date(post.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</div>
     ${post.featuredImage ? `<img src="${post.featuredImage}" alt="${post.title}" style="width:100%; border-radius:3px; margin-bottom:24px;">` : ""}
-    <div class="post-body">${post.html}</div>
+    <div class="post-body">${normalizePostHtml(post.html)}</div>
     <p style="margin-top:36px;"><a href="/blog" style="color:var(--brass-bright);">&larr; Back to all posts</a></p>
   </div>
 </section>`;
