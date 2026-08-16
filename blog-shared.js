@@ -11,8 +11,8 @@ const HEAD_STYLE = `
   body{background:var(--gunmetal); color:var(--off-white); font-family:'Source Sans 3', sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
   h1,h2,h3,h4{font-family:'Oswald', sans-serif; text-transform:uppercase; letter-spacing:0.02em; font-weight:600; line-height:1.15;}
   a{color:inherit; text-decoration:none;}
-  .wrap{max-width:820px; margin:0 auto; padding:0 24px;}
-  header{position:sticky; top:0; z-index:100; background:rgba(27,32,39,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--line);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  header{position:sticky; top:0; z-index:9999; background:rgba(27,32,39,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--line);}
   .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1120px; margin:0 auto;}
   .logo{font-family:'Oswald', sans-serif; font-size:1.15rem; letter-spacing:0.03em; text-transform:uppercase; display:flex; align-items:center; gap:10px;}
   .logo .mark{color:var(--brass-bright);}
@@ -25,8 +25,20 @@ const HEAD_STYLE = `
   .post-body{color:var(--off-white-dim); font-size:1.02rem;}
   .post-body p{margin-bottom:18px;}
   .post-body h2, .post-body h3{color:var(--off-white); margin:28px 0 12px;}
-  .post-body img{max-width:100%; border-radius:var(--radius); margin:20px 0;}
+  .post-body img{max-width:100%; height:auto; border-radius:var(--radius); margin:20px 0;}
   .post-body a{color:var(--brass-bright); text-decoration:underline;}
+  /* Soro's article HTML can include its own inline positioning/CSS (sticky
+     boxes, floating widgets, tables of contents). Lock all of that down so
+     it can never escape the article and overlap the header or run off the
+     page width. */
+  .post-body *{
+    position:static !important;
+    z-index:auto !important;
+    max-width:100% !important;
+    float:none !important;
+    top:auto !important; left:auto !important; right:auto !important; bottom:auto !important;
+  }
+  .post-body table{display:block; overflow-x:auto; width:100%;}
   .post-list-item{border-top:1px solid var(--line); padding:26px 0;}
   .post-list-item:first-child{border-top:none;}
   .post-list-item h2{font-size:1.2rem; margin-bottom:8px;}
