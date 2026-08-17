@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | A+ Lock & Service</title>
+<meta name="description" content="Locksmith tips, news, and advice from A+ Lock & Service, serving Northeastern Pennsylvania.">
+<link rel="canonical" href="https://www.locallocksmithpros.com/blog">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gunmetal: #1b2027; --gunmetal-2: #232a33; --steel: #3e4c59; --steel-light: #7c8ba1;
+    --brass: #c9974f; --brass-bright: #e0b567; --off-white: #ede8de; --off-white-dim: #b8b3a6;
+    --alert: #b3462f; --line: rgba(237,232,222,0.12); --radius: 3px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--gunmetal); color:var(--off-white); font-family:'Source Sans 3', sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  h1,h2{font-family:'Oswald', sans-serif; text-transform:uppercase; letter-spacing:0.02em; font-weight:600;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  header{position:sticky; top:0; z-index:9999; background:rgba(27,32,39,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--line);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1120px; margin:0 auto;}
+  .logo{font-family:'Oswald', sans-serif; font-size:1.15rem; letter-spacing:0.03em; text-transform:uppercase; display:flex; align-items:center; gap:10px;}
+  .logo .mark{color:var(--brass-bright);}
+  .nav-call{display:flex; align-items:center; gap:8px; border:1px solid var(--brass); color:var(--brass-bright); padding:9px 16px; font-family:'JetBrains Mono',monospace; font-size:0.9rem; border-radius:var(--radius);}
+  .breadcrumb{font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--steel-light); padding:18px 0 0;}
+  .breadcrumb a:hover{color:var(--brass-bright);}
+  .page-head{padding:20px 0 8px;}
+  .page-head h1{font-size:clamp(1.7rem,4vw,2.4rem); margin-bottom:8px;}
+  .page-head p{color:var(--off-white-dim);}
+  #blog-embed-wrap{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:1120px;
+    margin:24px auto 0;
+    padding:0 24px 60px;
+    overflow:visible;
+  }
+  #soro-blog{ width:100%; }
+  .strip{background:var(--alert); color:var(--off-white); padding:20px 0; margin-top:40px;}
+  .strip .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;}
+  .strip p{font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.03em; font-size:1rem;}
+  .btn{display:inline-flex; padding:12px 22px; border-radius:var(--radius); font-family:'Oswald', sans-serif; font-weight:600; font-size:0.9rem; letter-spacing:0.04em; text-transform:uppercase; background:var(--gunmetal); color:var(--off-white); border:1px solid rgba(255,255,255,0.3);}
+  footer{padding:40px 0; border-top:1px solid var(--line);}
+  .foot-note{font-size:0.78rem; color:var(--steel-light); font-family:'JetBrains Mono',monospace;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo"><span class="mark">A+</span> Lock &amp; Service</div>
+    <a class="nav-call" href="tel:2158289696">(215) 828-9696</a>
+  </div>
+</header>
+
+<div class="wrap breadcrumb"><a href="/">Home</a> &rsaquo; Blog</div>
+
+<div class="wrap page-head">
+  <h1>Locksmith Tips &amp; News</h1>
+  <p>Advice and updates from A+ Lock &amp; Service, serving Northeastern Pennsylvania.</p>
+</div>
+
+<div id="blog-embed-wrap">
+  <div id="soro-blog"></div>
+  <script src="https://app.trysoro.com/api/embed/1e5ba08d-7966-4593-8fcd-7919112faeac?theme=dark" defer></script>
+</div>
+
+<div class="strip">
+  <div class="wrap">
+    <p>Locked out right now? We're available 24/7.</p>
+    <a class="btn" href="tel:2158289696">Call (215) 828-9696</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-note">&copy; <span id="year"></span> A+ Lock &amp; Service &mdash; Mobile Locksmith, Northeastern Pennsylvania.</div>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>
