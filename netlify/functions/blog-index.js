@@ -2,7 +2,11 @@ const { getStore } = require("@netlify/blobs");
 const { pageWrap } = require("./blog-shared");
 
 exports.handler = async () => {
-  const store = getStore("blog-posts");
+  const store = getStore({
+    name: "blog-posts",
+    siteID: process.env.NETLIFY_SITE_ID,
+    token: process.env.NETLIFY_BLOBS_TOKEN,
+  });
   let index = [];
   try {
     index = (await store.get("_index", { type: "json" })) || [];
@@ -15,9 +19,7 @@ exports.handler = async () => {
     try {
       const post = await store.get(slug, { type: "json" });
       if (post) posts.push(post);
-    } catch (e) {
-      // skip missing/corrupt entries
-    }
+    } catch (e) {}
   }
 
   const listHtml = posts.length
