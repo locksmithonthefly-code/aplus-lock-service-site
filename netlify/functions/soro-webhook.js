@@ -1,6 +1,3 @@
-// Receives new posts from Soro and stores them in Netlify Blobs.
-// Soro's exact field names can vary by plan/config, so this reads several
-// common variants defensively and logs the raw payload for debugging.
 const { getStore } = require("@netlify/blobs");
 
 function slugify(str) {
@@ -16,7 +13,6 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  // --- Auth check ---
   const expectedSecret = process.env.SORO_WEBHOOK_SECRET;
   const providedSecret =
     event.headers["x-soro-secret"] ||
@@ -34,30 +30,15 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: "Invalid JSON" };
   }
 
-  // Log the raw payload so we can see Soro's real field names on first delivery.
   console.log("Soro webhook payload:", JSON.stringify(payload));
 
-  const title =
-    payload.title || payload.headline || payload.name || "Untitled Post";
+  const title = payload.title || payload.headline || payload.name || "Untitled Post";
   const html =
-    payload.content_html ||
-    payload.contentHtml ||
-    payload.html ||
-    payload.content ||
-    payload.body ||
-    "";
+    payload.content_html || payload.contentHtml || payload.html || payload.content || payload.body || "";
   const metaDescription =
-    payload.meta_description ||
-    payload.metaDescription ||
-    payload.excerpt ||
-    payload.summary ||
-    "";
+    payload.meta_description || payload.metaDescription || payload.excerpt || payload.summary || "";
   const featuredImage =
-    payload.featured_image_url ||
-    payload.featuredImageUrl ||
-    payload.image ||
-    payload.imageUrl ||
-    "";
+    payload.featured_image_url || payload.featuredImageUrl || payload.image || payload.imageUrl || "";
   const slug = slugify(payload.slug || title);
   const tags = payload.tags || payload.categories || [];
   const publishedAt = payload.published_at || payload.publishedAt || new Date().toISOString();
@@ -66,20 +47,15 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: "Missing post content in payload" };
   }
 
-  const store = getStore("blog-posts");
-  const post = {
-    title,
-    html,
-    metaDescription,
-    featuredImage,
-    slug,
-    tags,
-    publishedAt,
-  };
+  const store = getStore({
+    name: "blog-posts",
+    siteID: process.env.NETLIFY_SITE_ID,
+    token: process.env.NETLIFY_BLOBS_TOKEN,
+  });
+  const post = { title, html, metaDescription, featuredImage, slug, tags, publishedAt };
 
   await store.setJSON(slug, post);
 
-  // Maintain an index of all slugs, newest first
   let index = [];
   try {
     index = (await store.get("_index", { type: "json" })) || [];
