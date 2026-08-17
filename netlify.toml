@@ -1,21 +1,12 @@
 [build]
   publish = "."
-  functions = "netlify/functions"
-
-[functions]
-  node_bundler = "esbuild"
-
-[[redirects]]
-  from = "/api/soro-webhook"
-  to = "/.netlify/functions/soro-webhook"
-  status = 200
 
 [[redirects]]
   from = "/blog"
-  to = "/.netlify/functions/blog-index"
+  to = "/blog.html"
   status = 200
 
 [[redirects]]
   from = "/blog/*"
-  to = "/.netlify/functions/blog-post"
+  to = "/blog.html"
   status = 200
