@@ -3,7 +3,11 @@ const { pageWrap } = require("./blog-shared");
 
 exports.handler = async (event) => {
   const slug = event.path.replace("/blog/", "").replace(/\/$/, "");
-  const store = getStore("blog-posts");
+  const store = getStore({
+    name: "blog-posts",
+    siteID: process.env.NETLIFY_SITE_ID,
+    token: process.env.NETLIFY_BLOBS_TOKEN,
+  });
 
   let post;
   try {
