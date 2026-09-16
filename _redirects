@@ -1,0 +1,29 @@
+# Old .html URLs -> clean URLs (301 permanent)
+# The ! forces the redirect even though the .html file still exists.
+
+/index.html                          /                             301!
+
+/car-lockout.html                    /car-lockout                  301!
+/lost-car-keys.html                  /lost-car-keys                301!
+/key-fob-programming.html            /key-fob-programming          301!
+/home-lockout.html                   /home-lockout                 301!
+/commercial-locksmith.html           /commercial-locksmith         301!
+/lock-rekeying.html                  /lock-rekeying                301!
+/blog.html                           /blog                         301!
+
+/auto-locksmith-allentown.html       /auto-locksmith-allentown     301!
+/auto-locksmith-bethlehem.html       /auto-locksmith-bethlehem     301!
+/auto-locksmith-easton.html          /auto-locksmith-easton        301!
+/auto-locksmith-reading.html         /auto-locksmith-reading       301!
+/auto-locksmith-scranton.html        /auto-locksmith-scranton      301!
+/auto-locksmith-hazleton.html        /auto-locksmith-hazleton      301!
+/auto-locksmith-stroudsburg.html     /auto-locksmith-stroudsburg   301!
+/auto-locksmith-quakertown.html      /auto-locksmith-quakertown    301!
+
+# Wilkes-Barre: page still exists but is out of the sitemap.
+/auto-locksmith-wilkes-barre.html    /auto-locksmith-wilkes-barre  301!
+
+# If you decide to DELETE the Wilkes-Barre page entirely, delete the two
+# lines above and below this comment and uncomment this instead:
+# /auto-locksmith-wilkes-barre.html  /auto-locksmith-hazleton      301!
+# /auto-locksmith-wilkes-barre       /auto-locksmith-hazleton      301!
